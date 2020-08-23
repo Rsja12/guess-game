@@ -1,23 +1,47 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    TouchableWithoutFeedback,
+    Keyboard
+} from 'react-native';
 
 import Card from '../components/Card';
 import Input from '../components/Input';
 import colors from '../constants/colors';
 
 const StartGameScreen = (props) => {
+    const [enteredValue, setEnteredValue] = useState('');
+
+    const handleInput = (input) => {
+        // make numbers are only input
+        setEnteredValue(input.replace(/[^0-9]/g, ''));
+    };
+
     return (
-        <View style={styles.screen}>
-            <Text style={styles.title}>Start A New Game!</Text>
-            <Card style={styles.inputContainer}>
-                <Text>Enter a number</Text>
-                <Input style={styles.inputField} />
-                <View style={styles.buttonContainer}>
-                    <Button title='Reset' color={colors.secondary} />
-                    <Button title='Confirm' color={colors.primary} />
-                </View>
-            </Card>
-        </View>
+        // dismiss keyboard when pressing away from it (iOS)
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.screen}>
+                <Text style={styles.title}>Start A New Game!</Text>
+                <Card style={styles.inputContainer}>
+                    <Text>Enter a number</Text>
+                    <Input
+                        style={styles.inputField}
+                        keyboardAppearance='dark'
+                        keyboardType='number-pad'
+                        maxLength={2}
+                        onChangeText={handleInput}
+                        value={enteredValue}
+                    />
+                    <View style={styles.buttonContainer}>
+                        <Button title='Reset' color={colors.secondary} />
+                        <Button title='Confirm' color={colors.primary} />
+                    </View>
+                </Card>
+            </View>
+        </TouchableWithoutFeedback>
     );
 };
 
@@ -44,6 +68,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     inputField: {
-        width: 50
-    }
+        width: 50,
+        textAlign: 'center',
+    },
 });
