@@ -11,6 +11,7 @@ import {
 
 import Card from '../components/Card';
 import Input from '../components/Input';
+import NumberContainer from '../components/NumberContainer';
 import colors from '../constants/colors';
 
 const StartGameScreen = (props) => {
@@ -47,14 +48,12 @@ const StartGameScreen = (props) => {
         confirmedOutput = (
             <Card style={styles.summaryContainer}>
                 <Text>Chosen number:</Text>
-                <View>
-                    <Text>{selectedNumber}</Text>
-                </View>
+                <NumberContainer>{selectedNumber}</NumberContainer>
             </Card>
         );
     }
 
-    return (
+    return ( 
         // dismiss keyboard when pressing away from it
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.screen}>
@@ -115,6 +114,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     summaryContainer: {
-        marginTop: 20
-    }
+        marginTop: 20,
+    },
 });
