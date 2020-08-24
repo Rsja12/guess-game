@@ -41,6 +41,7 @@ const StartGameScreen = (props) => {
         setIsConfirmed(true);
         setSelectedNumber(parseInt(enteredValue));
         setEnteredValue('');
+        Keyboard.dismiss();
     };
 
     let confirmedOutput;
@@ -49,11 +50,12 @@ const StartGameScreen = (props) => {
             <Card style={styles.summaryContainer}>
                 <Text>Chosen number:</Text>
                 <NumberContainer>{selectedNumber}</NumberContainer>
+                <Button title='START GAME' />
             </Card>
         );
     }
 
-    return ( 
+    return (
         // dismiss keyboard when pressing away from it
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.screen}>
@@ -115,5 +117,6 @@ const styles = StyleSheet.create({
     },
     summaryContainer: {
         marginTop: 20,
+        alignItems: 'center',
     },
 });
