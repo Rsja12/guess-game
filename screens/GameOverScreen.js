@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import fonts from '../constants/fonts';
 
+import MainButton from '../components/MainButton';
+
 const GameOverScreen = (props) => {
     return (
         <View style={styles.screen}>
@@ -21,7 +23,9 @@ const GameOverScreen = (props) => {
             <Text style={fonts.titleText}>
                 Number of rounds: {props.rounds}
             </Text>
-            <Button title='Play Again!' onPress={() => props.onRestart()} />
+            <MainButton onPress={() => props.onRestart()}>
+                Play Again
+            </MainButton>
         </View>
     );
 };
