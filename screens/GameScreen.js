@@ -9,7 +9,7 @@ import MainButton from '../components/MainButton';
 
 const renderListItem = (value) => {
     return (
-        <View key={value}>
+        <View key={value} style={styles.listItem}>
             <Text>{value}</Text>
         </View>
     );
@@ -81,9 +81,11 @@ const GameScreen = (props) => {
                     <Ionicons name='ios-add' size={24} color='white' />
                 </MainButton>
             </Card>
-            <ScrollView>
-                {guesses.map((guess) => renderListItem(guess))}
-            </ScrollView>
+            <View style={styles.listItemContainer}>
+                <ScrollView>
+                    {guesses.map((guess) => renderListItem(guess))}
+                </ScrollView>
+            </View>
         </View>
     );
 };
@@ -103,4 +105,17 @@ const styles = StyleSheet.create({
         width: 300,
         maxWidth: '80%',
     },
+    listItem: {
+        borderColor: 'black',
+        padding: 15,
+        marginVertical: 10,
+        backgroundColor: 'white',
+        borderWidth: 1,
+        borderRadius: 3,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    listItemContainer: {
+        width:'60%',
+    }
 });
