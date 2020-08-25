@@ -11,6 +11,11 @@ export default function App() {
     const [userNum, setUserNum] = useState()
     const [rounds, setRounds] = useState(0)
 
+    const handleNewGame = () => {
+        setRounds(0)
+        setUserNum(null)
+    }
+
     const handleStartGame = (selectedNum) => {
         setUserNum(selectedNum)
         setRounds(0)
@@ -24,7 +29,7 @@ export default function App() {
     if (userNum && rounds <= 0) {
         content = <GameScreen userNum={userNum} onGameOver={handleGameOver} />
     } else if (rounds > 0) {
-        content = <GameOverScreen />
+        content = <GameOverScreen rounds={rounds} onRestart={handleNewGame} />
     }
 
     return (
