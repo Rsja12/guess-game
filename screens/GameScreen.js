@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
+import GameOverScreen from '../screens/GameOverScreen';
 
 const generateRandomNum = (min, max, exclude) => {
     min = Math.ceil(min);
@@ -19,9 +20,17 @@ const GameScreen = (props) => {
     const [currentGuess, setCurrentGuess] = useState(
         generateRandomNum(1, 100, props.userNum)
     );
+    const [numOfRounds, setNumOfRounds] = useState(0);
 
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
+
+    const { userNum, onGameOver } = props;
+    useEffect(() => {
+        if (currentGuess === userNum) {
+            onGameOver(numOfRounds);
+        }
+    }, [currentGuess, userNum, numOfRounds]);
 
     const handleNextGuess = (direction) => {
         if (
@@ -39,12 +48,14 @@ const GameScreen = (props) => {
         } else {
             currentLow.current = currentGuess;
         }
+
         const nextNum = generateRandomNum(
             currentLow.current,
             currentHigh.current,
             currentGuess
         );
         setCurrentGuess(nextNum);
+        setNumOfRounds((prevState) => prevState + 1);
     };
 
     return (
