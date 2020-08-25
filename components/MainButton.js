@@ -20,10 +20,11 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
         paddingVertical: 12,
         paddingHorizontal: 30,
+        borderRadius: 5
     },
     buttonText: {
         color: 'white',
         fontFamily: 'open-sans',
-        fontSize: 80
+        fontSize: 18
     }
 })
