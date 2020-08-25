@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
 import fonts from '../constants/fonts';
-import colors from '../constants/colors';
 import MainButton from '../components/MainButton';
 
 const generateRandomNum = (min, max, exclude) => {
@@ -20,10 +19,10 @@ const generateRandomNum = (min, max, exclude) => {
 };
 
 const GameScreen = (props) => {
-    const [currentGuess, setCurrentGuess] = useState(
-        generateRandomNum(1, 100, props.userNum)
-    );
-    const [numOfRounds, setNumOfRounds] = useState(0);
+    const initialGuess = generateRandomNum(1, 100, props.userNum);
+
+    const [currentGuess, setCurrentGuess] = useState(initialGuess);
+    const [guesses, setGuesses] = useState([initialGuess]);
 
     const currentLow = useRef(1);
     const currentHigh = useRef(100);
@@ -31,9 +30,9 @@ const GameScreen = (props) => {
     const { userNum, onGameOver } = props;
     useEffect(() => {
         if (currentGuess === userNum) {
-            onGameOver(numOfRounds);
+            onGameOver(guesses.length);
         }
-    }, [currentGuess, userNum, numOfRounds]);
+    }, [currentGuess, userNum, guesses.length]);
 
     const handleNextGuess = (direction) => {
         if (
@@ -49,7 +48,7 @@ const GameScreen = (props) => {
         if (direction === 'lower') {
             currentHigh.current = currentGuess;
         } else {
-            currentLow.current = currentGuess;
+            currentLow.current = currentGuess + 1;
         }
 
         const nextNum = generateRandomNum(
@@ -57,8 +56,9 @@ const GameScreen = (props) => {
             currentHigh.current,
             currentGuess
         );
+
         setCurrentGuess(nextNum);
-        setNumOfRounds((prevState) => prevState + 1);
+        setGuesses((prevState) => [nextNum, ...prevState]);
     };
 
     return (
@@ -73,6 +73,13 @@ const GameScreen = (props) => {
                     <Ionicons name='ios-add' size={24} color='white' />
                 </MainButton>
             </Card>
+            <ScrollView>
+                {guesses.map((guess) => (
+                    <View key={guess}>
+                        <Text>{guess}</Text>
+                    </View>
+                ))}
+            </ScrollView>
         </View>
     );
 };
