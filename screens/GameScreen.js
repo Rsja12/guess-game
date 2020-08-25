@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
-import fonts from '../constants/fonts'
+import fonts from '../constants/fonts';
+import colors from '../constants/colors';
+import MainButton from '../components/MainButton';
 
 const generateRandomNum = (min, max, exclude) => {
     min = Math.ceil(min);
@@ -63,14 +66,12 @@ const GameScreen = (props) => {
             <Text style={fonts.titleText}>AI guess</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.buttonContainer}>
-                <Button
-                    title='Lower'
-                    onPress={() => handleNextGuess('lower')}
-                />
-                <Button
-                    title='Higher'
-                    onPress={() => handleNextGuess('higher')}
-                />
+                <MainButton onPress={() => handleNextGuess('lower')}>
+                    <Ionicons name='ios-remove' size={24} color='black' />
+                </MainButton>
+                <MainButton onPress={() => handleNextGuess('higher')}>
+                    <Ionicons name='ios-add' size={24} color='black' />
+                </MainButton>
             </Card>
         </View>
     );
