@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
 import NumberContainer from '../components/NumberContainer';
 import Card from '../components/Card';
-import GameOverScreen from '../screens/GameOverScreen';
 import fonts from '../constants/fonts'
 
 const generateRandomNum = (min, max, exclude) => {
