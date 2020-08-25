@@ -7,6 +7,14 @@ import Card from '../components/Card';
 import fonts from '../constants/fonts';
 import MainButton from '../components/MainButton';
 
+const renderListItem = (value) => {
+    return (
+        <View key={value}>
+            <Text>{value}</Text>
+        </View>
+    );
+};
+
 const generateRandomNum = (min, max, exclude) => {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -74,11 +82,7 @@ const GameScreen = (props) => {
                 </MainButton>
             </Card>
             <ScrollView>
-                {guesses.map((guess) => (
-                    <View key={guess}>
-                        <Text>{guess}</Text>
-                    </View>
-                ))}
+                {guesses.map((guess) => renderListItem(guess))}
             </ScrollView>
         </View>
     );
