@@ -13,6 +13,7 @@ import Card from '../components/Card';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
 import colors from '../constants/colors';
+import fonts from '../constants/fonts';
 
 const StartGameScreen = (props) => {
     const [enteredValue, setEnteredValue] = useState('');
@@ -59,9 +60,9 @@ const StartGameScreen = (props) => {
         // dismiss keyboard when pressing away from it
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
             <View style={styles.screen}>
-                <Text style={styles.title}>Start A New Game!</Text>
+                <Text style={fonts.titleText}>Start A New Game!</Text>
                 <Card style={styles.inputContainer}>
-                    <Text>Enter a number</Text>
+                    <Text style={fonts.bodyText}>Enter a number</Text>
                     <Input
                         style={styles.inputField}
                         keyboardAppearance='dark'
@@ -96,10 +97,6 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 10,
         alignItems: 'center',
-    },
-    title: {
-        fontSize: 20,
-        marginVertical: 10,
     },
     inputContainer: {
         width: '80%',
