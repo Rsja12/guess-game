@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Dimensions } from 'react-native';
 
 import fonts from '../constants/fonts';
 import MainButton from '../components/MainButton';
@@ -7,7 +7,7 @@ import MainButton from '../components/MainButton';
 const GameOverScreen = (props) => {
     return (
         <View style={styles.screen}>
-            <Text style={fonts.titleText}>She Guessed It!</Text>
+            <Text style={styles.text}>She Guessed It!</Text>
             <View style={styles.imageContainer}>
                 <Image
                     source={{
@@ -34,14 +34,14 @@ export default GameOverScreen;
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
+        // flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
     imageContainer: {
-        width: 300,
-        height: 300,
-        borderRadius: 150,
+        width: Dimensions.get('window').width * 0.70,
+        height: Dimensions.get('window').width * 0.70,
+        borderRadius: Dimensions.get('window').width * 0.70 / 2,
         borderWidth: 3,
         borderColor: 'black',
         overflow: 'hidden',
@@ -51,4 +51,9 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
     },
+    text: {
+        fontFamily: 'open-sans-bold',
+        fontSize: 20,
+        marginVertical: Dimensions.get('window').height / 20
+    }
 });
