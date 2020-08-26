@@ -7,6 +7,7 @@ import {
     TouchableWithoutFeedback,
     Keyboard,
     Alert,
+    Dimensions
 } from 'react-native';
 
 import Card from '../components/Card';
@@ -53,7 +54,7 @@ const StartGameScreen = (props) => {
                 <Text style={fonts.bodyText}>Chosen number:</Text>
                 <NumberContainer>{selectedNumber}</NumberContainer>
                 <MainButton onPress={() => props.onStartGame(selectedNumber)}>
-                    Start Game
+                    Start Game Now!
                 </MainButton>
             </Card>
         );
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
     },
     inputField: {
-        width: 50,
+        width: Dimensions.get('window').width / 8,
         textAlign: 'center',
     },
     summaryContainer: {
