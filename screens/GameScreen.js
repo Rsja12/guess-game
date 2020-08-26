@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     listItemContainer: {
+        flex: 1,
         width:'60%',
     }
 });
